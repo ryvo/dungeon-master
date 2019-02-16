@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import cz.ryvo.dm.domain.SquareVisualLocationEnum;
+
 import static cz.ryvo.dm.domain.map.Square.SquareType.AREA;
 
 public final class Area extends Square {
@@ -17,7 +19,7 @@ public final class Area extends Square {
     }
 
     @Override
-    public void saveData(DataOutputStream out) throws IOException {
-        out.writeByte(type.getCode());
+    public void render(SquareVisualLocationEnum location) {
+
     }
 }

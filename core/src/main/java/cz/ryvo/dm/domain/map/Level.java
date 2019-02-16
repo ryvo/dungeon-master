@@ -2,12 +2,17 @@ package cz.ryvo.dm.domain.map;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 
 import static java.lang.String.format;
 
-public class Level extends Saveable {
+public class Level implements Serializable {
 
     Square[][] squares;
+
+    public Level(Square[][] squares) {
+        this.squares = squares;
+    }
 
     public Level(int xSize, int ySize) {
         if (xSize < 3 || ySize < 3) {
@@ -39,16 +44,5 @@ public class Level extends Saveable {
             throw new ArrayIndexOutOfBoundsException(format("Requested square is out of the level bounds. Requested square at position (%d,%d). The size of the level is (%d, %d).", x, y, squares[y].length, squares.length));
         }
         squares[x][y] = square;
-    }
-
-    @Override
-    public void saveData(DataOutputStream out) throws IOException {
-        out.writeByte(getSizeX());
-        out.writeByte(getSizeY());
-        for (int x = 0; x < getSizeX(); x++) {
-            for (int y = 0; y < getSizeX(); y++) {
-                out.write(squares[x][y].getData());
-            }
-        }
     }
 }

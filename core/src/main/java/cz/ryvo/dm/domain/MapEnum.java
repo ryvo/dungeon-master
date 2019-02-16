@@ -1,4 +1,4 @@
-package cz.ryvo.dm;
+package cz.ryvo.dm.domain;
 
 public enum MapEnum {
     CEILING("ceiling"),

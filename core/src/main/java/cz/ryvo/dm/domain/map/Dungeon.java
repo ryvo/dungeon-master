@@ -1,25 +1,23 @@
 package cz.ryvo.dm.domain.map;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.Serializable;
 
 import static java.lang.String.format;
 
-public class Dungeon extends Saveable {
+public class Dungeon implements Serializable {
 
     Level[] levels;
+
+    public Dungeon() {}
+
+    public Dungeon(Level[] levels) {
+        this.levels = levels;
+    }
 
     public Level getLevel(int z) {
         if (z < 0 || z >= levels.length) {
             throw new ArrayIndexOutOfBoundsException(format("Requested level is out of the dungeon bounds. Requested level %d. The size of the dungeon is %d.", z, levels.length));
         }
         return levels[z];
-    }
-
-    @Override
-    void saveData(DataOutputStream out) throws IOException {
-        for (Level level: levels) {
-            out.write(level.getData());
-        }
     }
 }

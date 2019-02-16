@@ -1,16 +1,14 @@
 package cz.ryvo.dm.domain.map;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class ExperimentalDungeonCreator {
 
     private Dungeon createDungeon() {
         Dungeon dungeon = new Dungeon();
-        Level level = new Level(255, 255);
+        Level level = new Level(7, 7);
 
         Area area = new Area();
         for (int x = 0; x < level.getSizeX(); x++) {
@@ -47,6 +45,14 @@ public class ExperimentalDungeonCreator {
     }
 
     public void serialize() throws IOException {
+        FileOutputStream fileOut =
+        new FileOutputStream("c:\\5\\dungeon.dat");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        Dungeon dungeon = createDungeon();
+        out.writeObject(dungeon);
+        out.close();
+        fileOut.close();
+/*
         File file = new File("c:\\5\\dungeon.dat");
         FileOutputStream fos = new FileOutputStream(file);
         try {
@@ -55,5 +61,6 @@ public class ExperimentalDungeonCreator {
         } finally {
             fos.close();
         }
+*/
     }
 }

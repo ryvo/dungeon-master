@@ -4,7 +4,6 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -12,29 +11,15 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import java.io.IOException;
 import java.util.EnumMap;
 
-import cz.ryvo.dm.domain.map.Block;
-import cz.ryvo.dm.domain.map.Dungeon;
+import cz.ryvo.dm.domain.MapEnum;
 import cz.ryvo.dm.domain.map.ExperimentalDungeonCreator;
-import cz.ryvo.dm.domain.map.Level;
-import cz.ryvo.dm.domain.map.Wall;
 
-import static cz.ryvo.dm.MapEnum.CEILING;
-import static cz.ryvo.dm.MapEnum.FLOOR;
-import static cz.ryvo.dm.MapEnum.WALL_FAR_LEFT_2;
-import static cz.ryvo.dm.MapEnum.WALL_FAR_LEFT_3;
-import static cz.ryvo.dm.MapEnum.WALL_FAR_RIGHT_2;
-import static cz.ryvo.dm.MapEnum.WALL_FAR_RIGHT_3;
-import static cz.ryvo.dm.MapEnum.WALL_FRONT_1;
-import static cz.ryvo.dm.MapEnum.WALL_FRONT_2;
-import static cz.ryvo.dm.MapEnum.WALL_FRONT_3;
-import static cz.ryvo.dm.MapEnum.WALL_LEFT_0;
-import static cz.ryvo.dm.MapEnum.WALL_LEFT_1;
-import static cz.ryvo.dm.MapEnum.WALL_LEFT_2;
-import static cz.ryvo.dm.MapEnum.WALL_LEFT_3;
-import static cz.ryvo.dm.MapEnum.WALL_RIGHT_0;
-import static cz.ryvo.dm.MapEnum.WALL_RIGHT_1;
-import static cz.ryvo.dm.MapEnum.WALL_RIGHT_2;
-import static cz.ryvo.dm.MapEnum.WALL_RIGHT_3;
+import static cz.ryvo.dm.domain.MapEnum.CEILING;
+import static cz.ryvo.dm.domain.MapEnum.FLOOR;
+import static cz.ryvo.dm.domain.MapEnum.WALL_FAR_LEFT_2;
+import static cz.ryvo.dm.domain.MapEnum.WALL_FAR_LEFT_3;
+import static cz.ryvo.dm.domain.MapEnum.WALL_FAR_RIGHT_2;
+import static cz.ryvo.dm.domain.MapEnum.WALL_FAR_RIGHT_3;
 
 public class DungeonMaster extends ApplicationAdapter {
 
@@ -121,7 +106,7 @@ public class DungeonMaster extends ApplicationAdapter {
 		//batch.draw(mapSprites.get(FLOOR), 0, 0);
 		batch.end();
 	}
-	
+
 	@Override
 	public void dispose () {
 		manager.dispose();

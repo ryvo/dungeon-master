@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import cz.ryvo.dm.domain.SquareVisualLocationEnum;
+
 import static cz.ryvo.dm.domain.map.Square.SquareType.BLOCK;
 
 public final class Block extends Square {
@@ -21,7 +23,11 @@ public final class Block extends Square {
     }
 
     @Override
-    public void saveData(DataOutputStream out) throws IOException {
-        out.writeByte(type.getCode());
+    public void render(SquareVisualLocationEnum location) {
+
+    }
+
+    private void renderWall(SquareVisualLocationEnum location) {
+
     }
 }
