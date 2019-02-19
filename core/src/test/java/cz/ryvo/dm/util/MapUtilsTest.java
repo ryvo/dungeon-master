@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import cz.ryvo.dm.Position2D;
+import cz.ryvo.dm.domain.Position2D;
 import cz.ryvo.dm.domain.map.Area;
 import cz.ryvo.dm.domain.map.Block;
 import cz.ryvo.dm.domain.map.Dungeon;

@@ -9,6 +9,7 @@ import cz.ryvo.dm.DungeonMaster;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title = "Dungeon Master Remake";
 		config.width = 1024;
 		config.height = 768;
 		new LwjglApplication(new DungeonMaster(), config);

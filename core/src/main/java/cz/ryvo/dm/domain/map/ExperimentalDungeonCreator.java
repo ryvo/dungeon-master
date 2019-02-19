@@ -6,7 +6,7 @@ import java.io.ObjectOutputStream;
 
 public class ExperimentalDungeonCreator {
 
-    private Dungeon createDungeon() {
+    public Dungeon createDungeon() {
         Dungeon dungeon = new Dungeon();
         Level level = new Level(7, 7);
 
