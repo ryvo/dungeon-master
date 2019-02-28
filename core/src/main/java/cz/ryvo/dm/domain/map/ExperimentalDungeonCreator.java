@@ -39,6 +39,8 @@ public class ExperimentalDungeonCreator {
         level.setSquare(2, 4, block);
         level.setSquare(2, 5, block);
 
+        level.setSquare(4, 4, block);
+
         dungeon.levels = new Level[] {level};
 
         return dungeon;

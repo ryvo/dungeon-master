@@ -1,7 +1,7 @@
 package cz.ryvo.dm.domain;
 
-public enum PartyMovementResult {
+public enum PartyMovementResultEnum {
     MOVE,
-    STAY,
+    HOLD,
     IMPACT
 }

@@ -10,7 +10,7 @@ public class Party {
 
     public DirectionEnum direction = DirectionEnum.NORTH;
 
-    public Position3D position = new Position3D(1, 1, 0);
+    public Vector3D position = new Vector3D(1, 1, 0);
 
     public void updateParty(float deltaTime) {
         timeCounter += deltaTime;
@@ -21,38 +21,10 @@ public class Party {
     }
 
     public void moveForward() {
-        switch (direction) {
-            case NORTH:
-                position.y++;
-                break;
-            case WEST:
-                position.x--;
-                break;
-            case SOUTH:
-                position.y--;
-                break;
-            case EAST:
-                position.x++;
-                break;
-        }
         resetTimeCounter();
     }
 
     public void moveBackward() {
-        switch (direction) {
-            case NORTH:
-                position.y--;
-                break;
-            case WEST:
-                position.x++;
-                break;
-            case SOUTH:
-                position.y++;
-                break;
-            case EAST:
-                position.x--;
-                break;
-        }
         resetTimeCounter();
     }
 

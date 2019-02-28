@@ -24,4 +24,11 @@ public abstract class Square implements Serializable {
         batch.draw(sprite, scale * drawingRectangle.x, scale * drawingRectangle.y, scale * drawingRectangle.width, scale * drawingRectangle.height);
     }
 
+    public boolean canPartyWalkIn() {
+        return false;
+    }
+
+    public boolean canPartyWalkOut() {
+        return false;
+    }
 }

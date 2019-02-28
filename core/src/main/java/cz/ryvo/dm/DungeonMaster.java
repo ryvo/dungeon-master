@@ -6,28 +6,40 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import cz.ryvo.dm.domain.DirectionEnum;
+import java.util.LinkedList;
+
+import cz.ryvo.dm.domain.MovementEnum;
 import cz.ryvo.dm.domain.Party;
-import cz.ryvo.dm.domain.Position2D;
+import cz.ryvo.dm.domain.Vector3D;
 import cz.ryvo.dm.domain.map.Dungeon;
 import cz.ryvo.dm.domain.map.ExperimentalDungeonCreator;
 import cz.ryvo.dm.domain.map.Level;
+import cz.ryvo.dm.domain.map.Square;
 import cz.ryvo.dm.renderer.DungeonRenderer;
 import cz.ryvo.dm.texture.SpriteManager;
+import cz.ryvo.dm.util.PartyUtils;
+
+import static cz.ryvo.dm.util.PartyUtils.getForwardMovementVector;
+import static cz.ryvo.dm.util.PartyUtils.updatePosition;
 
 public class DungeonMaster extends ApplicationAdapter {
 
 	private static final Float SCALE = 4f;
 
+	private Dungeon dungeon;
 	private SpriteBatch batch;
 	private SpriteManager spriteManager;
 	private Party party;
+	private LinkedList actionBuffer;
 
 	@Override
 	public void create () {
+		ExperimentalDungeonCreator edc = new ExperimentalDungeonCreator();
+		dungeon = edc.createDungeon();
 		batch = new SpriteBatch();
 		spriteManager = new SpriteManager();
 		party = new Party();
+		actionBuffer = new LinkedList();
 	}
 
 	@Override
@@ -43,6 +55,16 @@ public class DungeonMaster extends ApplicationAdapter {
 		batch.dispose();
 	}
 
+	private void updateParty(MovementEnum movement) {
+		Vector3D delta = getForwardMovementVector(party.direction, movement);
+		Vector3D newPosition = updatePosition(party.position, delta);
+		Square currentSquare = dungeon.getSquare(party.position);
+		Square newSquare = dungeon.getSquare(newPosition);
+		if (currentSquare.canPartyWalkOut() && newSquare.canPartyWalkIn()) {
+			party.position = newPosition;
+		}
+	}
+
 	private void updateGame(float deltaTime) {
 		party.updateParty(deltaTime);
 		if (party.canMove()) {
@@ -54,9 +76,11 @@ public class DungeonMaster extends ApplicationAdapter {
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 				party.moveForward();
+				updateParty(MovementEnum.FORWARD);
 			}
 			if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 				party.moveBackward();
+				updateParty(MovementEnum.BACKWARD);
 			}
 		}
 	}
@@ -66,8 +90,6 @@ public class DungeonMaster extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 
-		ExperimentalDungeonCreator edc = new ExperimentalDungeonCreator();
-		Dungeon dungeon = edc.createDungeon();
 		Level level = dungeon.getLevel(0);
 
 		DungeonRenderer renderer = new DungeonRenderer(batch, spriteManager);

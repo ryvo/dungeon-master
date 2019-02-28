@@ -24,6 +24,5 @@ public final class Block extends Square {
     }
 
     private void renderWall(VisibleAreaSquareLocationEnum location) {
-
     }
 }

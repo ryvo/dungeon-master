@@ -3,9 +3,8 @@ package cz.ryvo.dm.renderer;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import cz.ryvo.dm.domain.Position2D;
 import cz.ryvo.dm.domain.DirectionEnum;
-import cz.ryvo.dm.domain.Position3D;
+import cz.ryvo.dm.domain.Vector3D;
 import cz.ryvo.dm.domain.VisibleAreaSquareLocationEnum;
 import cz.ryvo.dm.domain.map.Level;
 import cz.ryvo.dm.domain.map.Square;
@@ -58,7 +57,7 @@ public class DungeonRenderer {
         this.spriteManager = spriteManager;
     }
 
-    public void render(Level level, Position3D partyPosition, DirectionEnum partyDirection, float scale) {
+    public void render(Level level, Vector3D partyPosition, DirectionEnum partyDirection, float scale) {
         renderCeiling(scale);
         renderFloor(scale);
         Square[][] squares = MapUtils.getVisibleSquares(level, partyPosition.x, partyPosition.y, partyDirection);

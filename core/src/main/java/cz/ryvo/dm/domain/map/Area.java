@@ -11,4 +11,14 @@ public final class Area extends Square {
     public Area() {
         type = VOID;
     }
+
+    @Override
+    public boolean canPartyWalkIn() {
+        return true;
+    }
+
+    @Override
+    public boolean canPartyWalkOut() {
+        return true;
+    }
 }

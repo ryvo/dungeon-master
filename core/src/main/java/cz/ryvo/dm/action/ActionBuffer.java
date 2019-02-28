@@ -1,9 +1,9 @@
-package cz.ryvo.dm;
+package cz.ryvo.dm.action;
 
 import java.util.LinkedList;
 
 public class ActionBuffer {
 
-    private LinkedList list;
+    private LinkedList<Action> list;
 
 }
