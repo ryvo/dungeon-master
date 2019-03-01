@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import cz.ryvo.dm.domain.DirectionEnum;
+import cz.ryvo.dm.domain.Party;
 import cz.ryvo.dm.domain.Vector3D;
 import cz.ryvo.dm.domain.VisibleAreaSquareLocationEnum;
 import cz.ryvo.dm.domain.map.Level;
@@ -57,23 +58,25 @@ public class DungeonRenderer {
         this.spriteManager = spriteManager;
     }
 
-    public void render(Level level, Vector3D partyPosition, DirectionEnum partyDirection, float scale) {
-        renderCeiling(scale);
-        renderFloor(scale);
-        Square[][] squares = MapUtils.getVisibleSquares(level, partyPosition.x, partyPosition.y, partyDirection);
+    public void render(Level level, Party party, float scale) {
+        renderCeiling(scale, party.evenStep);
+        renderFloor(scale, party.evenStep);
+        Square[][] squares = MapUtils.getVisibleSquares(level, party.position.x, party.position.y, party.direction);
         for (VisibleAreaSquareLocationEnum location: squareRenderingOrder) {
             Square square = squares[location.getSquarePosition().x][location.getSquarePosition().y];
-            square.render(batch, spriteManager, location, scale);
+            square.render(batch, spriteManager, location, party.evenStep, scale);
         }
     }
 
-    private void renderFloor(float scale) {
-        Sprite sprite = spriteManager.getSprite(FLOOR.getValue());
-		batch.draw(sprite, scale * 0, scale * 0, scale * sprite.getWidth(), scale * sprite.getHeight());
+    private void renderFloor(float scale, boolean evenStep) {
+        String spriteName = FLOOR.getValue().concat((evenStep) ? "-alt" : "");
+        Sprite sprite = spriteManager.getSprite(spriteName);
+        batch.draw(sprite, scale * 0, scale * 0, scale * sprite.getWidth(), scale * sprite.getHeight());
     }
 
-    private void renderCeiling(float scale) {
-        Sprite sprite = spriteManager.getSprite(CEILING.getValue());
+    private void renderCeiling(float scale, boolean evenStep) {
+        String spriteName = CEILING.getValue().concat((evenStep) ? "-alt" : "");
+        Sprite sprite = spriteManager.getSprite(spriteName);
 		batch.draw(sprite, scale * 0, scale * 97, scale * sprite.getWidth(), scale * sprite.getHeight());
     }
 }

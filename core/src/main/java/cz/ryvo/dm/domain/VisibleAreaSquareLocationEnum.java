@@ -19,16 +19,6 @@ public enum VisibleAreaSquareLocationEnum {
     FAR_RIGHT_2("far-right-2", new Position2D(4, 2), new Rectangle(216, 60, 8, 52)),
     FAR_RIGHT_3("far-right-3", new Position2D(4, 3), new Rectangle(180, 62, 44, 49));
 
-    //		sprite = mapSprites.get(WALL_LEFT_1);
-//		batch.draw(sprite, SCALE * 0, SCALE * 16, SCALE * sprite.getWidth(), SCALE * sprite.getHeight());
-
-    //		sprite = mapSprites.get(WALL_FRONT_3);
-//		batch.draw(sprite, SCALE * 78, SCALE * 62, SCALE * sprite.getWidth(), SCALE * sprite.getHeight());
-//		sprite = mapSprites.get(WALL_FRONT_2);
-//		batch.draw(sprite, SCALE * 60, SCALE * 43, SCALE * sprite.getWidth(), SCALE * sprite.getHeight());
-//		sprite = mapSprites.get(WALL_FRONT_1);
-//		batch.draw(sprite, SCALE * 32, SCALE * 16, SCALE * sprite.getWidth(), SCALE * sprite.getHeight());
-
     private String resourceName;
     private Position2D squarePosition;
     private Rectangle drawingRectangle;

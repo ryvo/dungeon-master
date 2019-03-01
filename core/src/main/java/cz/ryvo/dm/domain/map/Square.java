@@ -14,12 +14,16 @@ public abstract class Square implements Serializable {
 
     protected ObjectTypeEnum type;
 
-    public void render(SpriteBatch batch, SpriteManager spriteManager, VisibleAreaSquareLocationEnum location, float scale) {
+    public void render(SpriteBatch batch, SpriteManager spriteManager, VisibleAreaSquareLocationEnum location, boolean evenStep, float scale) {
         if (type == ObjectTypeEnum.VOID) return;
 
         String spriteName = String.join("-", type.getValue(), location.getResourceName());
-        Sprite sprite = spriteManager.getSprite(spriteName);
+        if (evenStep) {
+            // Use alternative texture each even step to make walking more realistic.
+            spriteName += "-alt";
+        }
 
+        Sprite sprite = spriteManager.getSprite(spriteName);
         Rectangle drawingRectangle = location.getDrawingRectangle();
         batch.draw(sprite, scale * drawingRectangle.x, scale * drawingRectangle.y, scale * drawingRectangle.width, scale * drawingRectangle.height);
     }

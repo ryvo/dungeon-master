@@ -1,6 +1,6 @@
 package cz.ryvo.dm.domain;
 
-public enum WalkEnum {
+public enum WalkActionEnum {
     STEP_FORWARD,
     STEP_BACKWARD,
     TURN_LEFT,

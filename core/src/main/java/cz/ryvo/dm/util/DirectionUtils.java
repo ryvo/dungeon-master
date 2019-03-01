@@ -3,7 +3,7 @@ package cz.ryvo.dm.util;
 import java.util.TreeSet;
 
 import cz.ryvo.dm.domain.DirectionEnum;
-import cz.ryvo.dm.domain.MovementEnum;
+import cz.ryvo.dm.domain.WalkActionEnum;
 
 import static cz.ryvo.dm.domain.DirectionEnum.EAST;
 import static cz.ryvo.dm.domain.DirectionEnum.NORTH;
@@ -37,11 +37,11 @@ public class DirectionUtils {
         return rightDirection(rightDirection(direction));
     }
 
-    public static DirectionEnum getMovementDirection(DirectionEnum direction, MovementEnum movement) {
-        switch (movement) {
-            case FORWARD:
+    public static DirectionEnum getMovementDirection(DirectionEnum direction, WalkActionEnum walkAction) {
+        switch (walkAction) {
+            case STEP_FORWARD:
                 return direction;
-            case BACKWARD:
+            case STEP_BACKWARD:
                 return rearDirection(direction);
             case TURN_LEFT:
             case STRAFE_LEFT:
@@ -50,7 +50,7 @@ public class DirectionUtils {
             case STRAFE_RIGHT:
                 return rightDirection(direction);
             default:
-                throw new IllegalArgumentException(format("Unsupported movement '%s'.", movement.name()));
+                throw new IllegalArgumentException(format("Unsupported movement '%s'.", walkAction.name()));
         }
     }
 }

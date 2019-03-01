@@ -2,86 +2,92 @@ package cz.ryvo.dm;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import java.util.LinkedList;
+import java.util.Locale;
 
-import cz.ryvo.dm.domain.MovementEnum;
+import cz.ryvo.dm.action.EventQueue;
+import cz.ryvo.dm.domain.WalkActionEnum;
 import cz.ryvo.dm.domain.Party;
-import cz.ryvo.dm.domain.Vector3D;
 import cz.ryvo.dm.domain.map.Dungeon;
 import cz.ryvo.dm.domain.map.ExperimentalDungeonCreator;
 import cz.ryvo.dm.domain.map.Level;
-import cz.ryvo.dm.domain.map.Square;
 import cz.ryvo.dm.renderer.DungeonRenderer;
 import cz.ryvo.dm.texture.SpriteManager;
-import cz.ryvo.dm.util.PartyUtils;
 
-import static cz.ryvo.dm.util.PartyUtils.getForwardMovementVector;
-import static cz.ryvo.dm.util.PartyUtils.updatePosition;
+import static com.badlogic.gdx.Input.Keys.DOWN;
+import static com.badlogic.gdx.Input.Keys.LEFT;
+import static com.badlogic.gdx.Input.Keys.NUMPAD_1;
+import static com.badlogic.gdx.Input.Keys.NUMPAD_2;
+import static com.badlogic.gdx.Input.Keys.NUMPAD_3;
+import static com.badlogic.gdx.Input.Keys.NUMPAD_4;
+import static com.badlogic.gdx.Input.Keys.NUMPAD_5;
+import static com.badlogic.gdx.Input.Keys.NUMPAD_6;
+import static com.badlogic.gdx.Input.Keys.RIGHT;
+import static com.badlogic.gdx.Input.Keys.UP;
+import static cz.ryvo.dm.domain.WalkActionEnum.STEP_BACKWARD;
+import static cz.ryvo.dm.domain.WalkActionEnum.STEP_FORWARD;
+import static cz.ryvo.dm.domain.WalkActionEnum.STRAFE_LEFT;
+import static cz.ryvo.dm.domain.WalkActionEnum.STRAFE_RIGHT;
+import static cz.ryvo.dm.domain.WalkActionEnum.TURN_LEFT;
+import static cz.ryvo.dm.domain.WalkActionEnum.TURN_RIGHT;
+import static java.lang.String.format;
 
-public class DungeonMaster extends ApplicationAdapter {
+public class DungeonMaster extends ApplicationAdapter implements InputProcessor {
 
-	private static final Float SCALE = 4f;
+	private static final float SCALE = 4f;
+	private static final float TICK_INTERVAL = 0.2f;
+	private static final int WALK_QUEUE_SIZE = 5;
+
+	private float tickTime;
+	private EventQueue<WalkActionEnum> walkQueue;
+	private DungeonRenderer renderer;
 
 	private Dungeon dungeon;
 	private SpriteBatch batch;
 	private SpriteManager spriteManager;
 	private Party party;
-	private LinkedList actionBuffer;
+	private BitmapFont font;
 
 	@Override
 	public void create () {
-		ExperimentalDungeonCreator edc = new ExperimentalDungeonCreator();
-		dungeon = edc.createDungeon();
+		tickTime = 0;
+		walkQueue = new EventQueue<>(WALK_QUEUE_SIZE);
+		Gdx.input.setInputProcessor(this);
+
 		batch = new SpriteBatch();
 		spriteManager = new SpriteManager();
-		party = new Party();
-		actionBuffer = new LinkedList();
+		renderer = new DungeonRenderer(batch, spriteManager);
+
+		ExperimentalDungeonCreator edc = new ExperimentalDungeonCreator();
+		dungeon = edc.createDungeon();
+
+		party = new Party(dungeon);
+		font = new BitmapFont();
 	}
 
+	/**
+	 * Game timing is based on ticks. A tick is a base time unit. Each action takes certain number of
+	 * ticks.
+	 */
 	@Override
 	public void render () {
-		float deltaTime = Gdx.graphics.getRawDeltaTime();
-		updateGame(deltaTime);
+		tickTime += Gdx.graphics.getRawDeltaTime();
+		if (tickTime >= TICK_INTERVAL) {
+			// Tick now!
+			tickTime = 0;
+			updateGame();
+		}
 		renderGame();
 	}
 
-	@Override
-	public void dispose () {
-		spriteManager.dispose();
-		batch.dispose();
-	}
-
-	private void updateParty(MovementEnum movement) {
-		Vector3D delta = getForwardMovementVector(party.direction, movement);
-		Vector3D newPosition = updatePosition(party.position, delta);
-		Square currentSquare = dungeon.getSquare(party.position);
-		Square newSquare = dungeon.getSquare(newPosition);
-		if (currentSquare.canPartyWalkOut() && newSquare.canPartyWalkIn()) {
-			party.position = newPosition;
-		}
-	}
-
-	private void updateGame(float deltaTime) {
-		party.updateParty(deltaTime);
-		if (party.canMove()) {
-			if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-				party.turnLeft();
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-				party.turnRight();
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-				party.moveForward();
-				updateParty(MovementEnum.FORWARD);
-			}
-			if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-				party.moveBackward();
-				updateParty(MovementEnum.BACKWARD);
-			}
+	private void updateGame() {
+		party.tick();
+		if (party.canWalk() && !walkQueue.isEmpty()) {
+			party.doWalkAction(walkQueue.get());
 		}
 	}
 
@@ -92,8 +98,80 @@ public class DungeonMaster extends ApplicationAdapter {
 
 		Level level = dungeon.getLevel(0);
 
-		DungeonRenderer renderer = new DungeonRenderer(batch, spriteManager);
-		renderer.render(level, party.position, party.direction, SCALE);
+		renderer.render(level, party, SCALE);
+
+		font.draw(batch, format(Locale.US,"walkQueue size: %d", walkQueue.getSize()), 10, 650);
+		font.draw(batch, format(Locale.US,"scale: %f", SCALE), 10, 630);
+
 		batch.end();
+	}
+
+	@Override
+	public void dispose () {
+		spriteManager.dispose();
+		batch.dispose();
+	}
+
+	@Override
+	public boolean keyDown(int keycode) {
+		switch (keycode) {
+			case UP:
+			case NUMPAD_5:
+				walkQueue.put(STEP_FORWARD);
+				break;
+			case DOWN:
+			case NUMPAD_2:
+				walkQueue.put(STEP_BACKWARD);
+				break;
+			case NUMPAD_4:
+				walkQueue.put(TURN_LEFT);
+				break;
+			case NUMPAD_6:
+				walkQueue.put(TURN_RIGHT);
+				break;
+			case LEFT:
+			case NUMPAD_1:
+				walkQueue.put(STRAFE_LEFT);
+				break;
+			case RIGHT:
+			case NUMPAD_3:
+				walkQueue.put(STRAFE_RIGHT);
+		}
+		return true;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		return false;
 	}
 }

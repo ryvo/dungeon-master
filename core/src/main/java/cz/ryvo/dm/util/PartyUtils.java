@@ -1,9 +1,7 @@
 package cz.ryvo.dm.util;
 
-import com.badlogic.gdx.math.Vector3;
-
 import cz.ryvo.dm.domain.DirectionEnum;
-import cz.ryvo.dm.domain.MovementEnum;
+import cz.ryvo.dm.domain.WalkActionEnum;
 import cz.ryvo.dm.domain.Vector3D;
 
 import static cz.ryvo.dm.util.DirectionUtils.getMovementDirection;
@@ -11,7 +9,7 @@ import static java.lang.String.format;
 
 public class PartyUtils {
 
-    public static Vector3D getForwardMovementVector(DirectionEnum direction, MovementEnum movement) {
+    public static Vector3D getWalkDeltaVector(DirectionEnum direction, WalkActionEnum movement) {
         return getMovementVector(getMovementDirection(direction, movement));
     }
 

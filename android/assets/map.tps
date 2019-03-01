@@ -64,9 +64,9 @@
             <key>filtering</key>
             <struct type="LibGDXFiltering">
                 <key>x</key>
-                <enum type="LibGDXFiltering::Filtering">Nearest</enum>
+                <enum type="LibGDXFiltering::Filtering">Linear</enum>
                 <key>y</key>
-                <enum type="LibGDXFiltering::Filtering">Nearest</enum>
+                <enum type="LibGDXFiltering::Filtering">Linear</enum>
             </struct>
         </struct>
         <key>shapePadding</key>
@@ -181,6 +181,7 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">src/ceiling-alt.png</key>
             <key type="filename">src/ceiling.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -194,6 +195,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">src/floor-alt.png</key>
             <key type="filename">src/floor.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -207,7 +209,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">src/wall-far-left-2-alt.png</key>
             <key type="filename">src/wall-far-left-2.png</key>
+            <key type="filename">src/wall-far-right-2-alt.png</key>
             <key type="filename">src/wall-far-right-2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -221,7 +225,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">src/wall-far-left-3-alt.png</key>
             <key type="filename">src/wall-far-left-3.png</key>
+            <key type="filename">src/wall-far-right-3-alt.png</key>
             <key type="filename">src/wall-far-right-3.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -235,6 +241,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">src/wall-front-1-alt.png</key>
             <key type="filename">src/wall-front-1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -248,6 +255,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">src/wall-front-2-alt.png</key>
             <key type="filename">src/wall-front-2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -261,6 +269,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">src/wall-front-3-alt.png</key>
             <key type="filename">src/wall-front-3.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -274,7 +283,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">src/wall-left-0-alt.png</key>
             <key type="filename">src/wall-left-0.png</key>
+            <key type="filename">src/wall-right-0-alt.png</key>
             <key type="filename">src/wall-right-0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -288,7 +299,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">src/wall-left-1-alt.png</key>
             <key type="filename">src/wall-left-1.png</key>
+            <key type="filename">src/wall-right-1-alt.png</key>
             <key type="filename">src/wall-right-1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -302,7 +315,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">src/wall-left-2-alt.png</key>
             <key type="filename">src/wall-left-2.png</key>
+            <key type="filename">src/wall-right-2-alt.png</key>
             <key type="filename">src/wall-right-2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -316,7 +331,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">src/wall-left-3-alt.png</key>
             <key type="filename">src/wall-left-3.png</key>
+            <key type="filename">src/wall-right-3-alt.png</key>
             <key type="filename">src/wall-right-3.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>

@@ -1,123 +1,243 @@
+
 map.png
-size: 236, 580
+size: 512,512
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
 ceiling
   rotate: false
-  xy: 0, 0
+  xy: 228, 304
+  size: 224, 39
+  orig: 224, 39
+  offset: 0, 0
+  index: -1
+ceiling-alt
+  rotate: false
+  xy: 228, 345
   size: 224, 39
   orig: 224, 39
   offset: 0, 0
   index: -1
 floor
   rotate: false
-  xy: 0, 236
+  xy: 2, 400
+  size: 224, 97
+  orig: 224, 97
+  offset: 0, 0
+  index: -1
+floor-alt
+  rotate: false
+  xy: 2, 301
   size: 224, 97
   orig: 224, 97
   offset: 0, 0
   index: -1
 wall-far-left-2
   rotate: false
-  xy: 114, 88
+  xy: 489, 394
+  size: 8, 52
+  orig: 8, 52
+  offset: 0, 0
+  index: -1
+wall-far-left-2-alt
+  rotate: false
+  xy: 287, 21
   size: 8, 52
   orig: 8, 52
   offset: 0, 0
   index: -1
 wall-far-left-3
   rotate: false
-  xy: 70, 88
+  xy: 452, 448
+  size: 44, 49
+  orig: 44, 49
+  offset: 0, 0
+  index: -1
+wall-far-left-3-alt
+  rotate: false
+  xy: 241, 24
   size: 44, 49
   orig: 44, 49
   offset: 0, 0
   index: -1
 wall-far-right-2
   rotate: false
-  xy: 122, 88
+  xy: 489, 340
+  size: 8, 52
+  orig: 8, 52
+  offset: 0, 0
+  index: -1
+wall-far-right-2-alt
+  rotate: false
+  xy: 432, 36
   size: 8, 52
   orig: 8, 52
   offset: 0, 0
   index: -1
 wall-far-right-3
   rotate: false
-  xy: 0, 39
+  xy: 195, 24
+  size: 44, 49
+  orig: 44, 49
+  offset: 0, 0
+  index: -1
+wall-far-right-3-alt
+  rotate: false
+  xy: 386, 39
   size: 44, 49
   orig: 44, 49
   offset: 0, 0
   index: -1
 wall-front-1
   rotate: false
-  xy: 0, 444
+  xy: 228, 386
+  size: 160, 111
+  orig: 160, 111
+  offset: 0, 0
+  index: -1
+wall-front-1-alt
+  rotate: false
+  xy: 2, 188
   size: 160, 111
   orig: 160, 111
   offset: 0, 0
   index: -1
 wall-front-2
   rotate: false
-  xy: 130, 88
+  xy: 2, 112
+  size: 106, 74
+  orig: 106, 74
+  offset: 0, 0
+  index: -1
+wall-front-2-alt
+  rotate: false
+  xy: 2, 36
   size: 106, 74
   orig: 106, 74
   offset: 0, 0
   index: -1
 wall-front-3
   rotate: false
-  xy: 0, 88
+  xy: 311, 202
+  size: 70, 49
+  orig: 70, 49
+  offset: 0, 0
+  index: -1
+wall-front-3-alt
+  rotate: false
+  xy: 234, 75
   size: 70, 49
   orig: 70, 49
   offset: 0, 0
   index: -1
 wall-left-0
   rotate: false
-  xy: 160, 444
+  xy: 454, 310
+  size: 33, 136
+  orig: 33, 136
+  offset: 0, 0
+  index: -1
+wall-left-0-alt
+  rotate: false
+  xy: 429, 90
   size: 33, 136
   orig: 33, 136
   offset: 0, 0
   index: -1
 wall-left-1
   rotate: false
-  xy: 0, 333
+  xy: 390, 386
+  size: 60, 111
+  orig: 60, 111
+  offset: 0, 0
+  index: -1
+wall-left-1-alt
+  rotate: false
+  xy: 164, 188
   size: 60, 111
   orig: 60, 111
   offset: 0, 0
   index: -1
 wall-left-2
   rotate: false
-  xy: 78, 162
+  xy: 234, 126
+  size: 78, 74
+  orig: 78, 74
+  offset: 0, 0
+  index: -1
+wall-left-2-alt
+  rotate: false
+  xy: 306, 50
   size: 78, 74
   orig: 78, 74
   offset: 0, 0
   index: -1
 wall-left-3
   rotate: false
-  xy: 127, 39
+  xy: 110, 24
+  size: 83, 49
+  orig: 83, 49
+  offset: 0, 0
+  index: -1
+wall-left-3-alt
+  rotate: false
+  xy: 313, 253
   size: 83, 49
   orig: 83, 49
   offset: 0, 0
   index: -1
 wall-right-0
   rotate: false
-  xy: 193, 444
+  xy: 464, 90
+  size: 33, 136
+  orig: 33, 136
+  offset: 0, 0
+  index: -1
+wall-right-0-alt
+  rotate: false
+  xy: 394, 90
   size: 33, 136
   orig: 33, 136
   offset: 0, 0
   index: -1
 wall-right-1
   rotate: false
-  xy: 60, 333
+  xy: 172, 75
+  size: 60, 111
+  orig: 60, 111
+  offset: 0, 0
+  index: -1
+wall-right-1-alt
+  rotate: false
+  xy: 110, 75
   size: 60, 111
   orig: 60, 111
   offset: 0, 0
   index: -1
 wall-right-2
   rotate: false
-  xy: 0, 162
+  xy: 398, 228
+  size: 78, 74
+  orig: 78, 74
+  offset: 0, 0
+  index: -1
+wall-right-2-alt
+  rotate: false
+  xy: 314, 126
   size: 78, 74
   orig: 78, 74
   offset: 0, 0
   index: -1
 wall-right-3
   rotate: false
-  xy: 44, 39
+  xy: 226, 202
+  size: 83, 49
+  orig: 83, 49
+  offset: 0, 0
+  index: -1
+wall-right-3-alt
+  rotate: false
+  xy: 228, 253
   size: 83, 49
   orig: 83, 49
   offset: 0, 0
